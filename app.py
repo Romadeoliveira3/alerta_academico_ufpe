@@ -1,25 +1,45 @@
-# app.py
-from flask import Flask, request, render_template
-from calc import Disciplina, Aula, ListaDeAulas, Historico, Acao
+import sys
+sys.path.append(r'.\models')
+
+
+
+from flask import Flask, render_template, request
+from aula import Aula
+from lista_de_aulas import ListaDeAulas
 
 app = Flask(__name__)
 
-@app.route('/')
-def form():
-    return render_template('attendance_form.html')
+@app.route("/")
+def home():
+  aulas = ListaDeAulas()
+  return render_template("home.html", aulas=aulas)
 
-@app.route('/calculate', methods=['POST'])
-def calculate():
-    nome = request.form['nome']
-    carga_horaria = int(request.form['carga_horaria'])
-    aulas_semana = int(request.form['aulas_semana'])
-    faltas = int(request.form['faltas'])
+@app.route("/add_aula", methods=["GET", "POST"])
+def add_aula():
+  if request.method == "GET":
+    return render_template("add_aula.html")
+  else:
+    nome = request.form["nome"]
+    carga_horaria = request.form["carga_horaria"]
+    aulas_semana = request.form["aulas_semana"]
+    aula = Aula(nome, carga_horaria, aulas_semana)
+    aula.adicionar_aula(aula)
+    return redirect(url_for("home"))
 
-    disciplina = Disciplina(nome, carga_horaria, aulas_semana)
-    for _ in range(faltas):
-        disciplina.adicionar_falta()
+@app.route("/add_falta", methods=["GET", "POST"])
+def add_falta():
+  if request.method == "GET":
+    return render_template("add_falta.html")
+  else:
+    nome = request.form["nome"]
+    aula = aula.buscar_aula(nome)
+    aula.adicionar_falta()
+    return redirect(url_for("home"))
 
-    return f'Você faltou {disciplina.mostrar_faltas()} aulas na disciplina {disciplina.nome}.'
+@app.route("/show_aulas", methods=["GET"])
+def show_aulas():
+  aulas = ListaDeAulas()
+  return render_template("show_aulas.html", aulas=aulas)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+  app.run(debug=True)

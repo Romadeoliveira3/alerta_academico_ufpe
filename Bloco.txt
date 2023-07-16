@@ -1,0 +1,15 @@
+< PROJECT ROOT >
+   |
+   |-- db.py
+   |-- app.py
+   |-- templates/
+   |    |-- attendance_form.html
+   |-- models/
+   |    |-- aula.py
+   |    |-- lista_de_aulas.py
+   |-- utils/
+   |    |-- attendance_utils.py
+   |-- tests/
+   |    |-- unit_tests.py
+   |-- requirements.txt
+
