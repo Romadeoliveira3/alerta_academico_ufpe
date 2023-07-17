@@ -4,7 +4,6 @@ from aula import Aula
 class ListaDeAulas:
     def __init__(self):
         self.head = None  # Início da lista encadeada. A cabeça da lista é o primeiro nó.
-
         # Conectar ao banco de dados
         self.conn = sqlite3.connect('aulas.db')
         self.c = self.conn.cursor()
@@ -105,3 +104,13 @@ class ListaDeAulas:
             self.conn.commit()
         else:
             print(f"Índice {indice} não encontrado.")
+
+    def get_all_aulas(self):
+        # Buscar todas as aulas no banco de dados
+        self.c.execute('''
+            SELECT * FROM aulas
+        ''')
+
+        aulas = self.c.fetchall()
+
+        return aulas

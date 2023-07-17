@@ -1,14 +1,13 @@
+<!-- home.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Attendance Form</title>
+  <title>Home</title>
 </head>
 <body>
-  <h1>Attendance Form</h1>
-  <form action="/add_falta" method="post">
-    <input type="text" name="nome" placeholder="Nome da aula">
-    <input type="submit" value="Add falta">
-  </form>
+  <h1>Bem-vindo ao Alerta Acadêmico UFPE</h1>
+  <a href="{{ url_for('main.add_aula') }}">Adicionar Aula</a>
+  <a href="{{ url_for('main.add_falta') }}">Adicionar Falta</a>
+  <a href="{{ url_for('main.show_aulas') }}">Mostrar Aulas</a>
 </body>
 </html>

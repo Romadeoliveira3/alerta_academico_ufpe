@@ -1,0 +1,20 @@
+<!-- show_aulas.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mostrar Aulas</title>
+</head>
+<body>
+  <h1>Mostrar Aulas</h1>
+  {% for aula in aulas %}
+    <p>Nome: {{ aula[0] }}</p>
+    <p>Carga Horária: {{ aula[1] }}</p>
+    <p>Aulas por Semana: {{ aula[2] }}</p>
+    <p>Semanas: {{ aula[3] }}</p>
+    <p>Total de Aulas: {{ aula[4] }}</p>
+    <p>Aulas Faltadas: {{ aula[5] }}</p>
+    <p>Percentual de Faltas: {{ aula[6] }}</p>
+    <hr>
+  {% endfor %}
+</body>
+</html>
